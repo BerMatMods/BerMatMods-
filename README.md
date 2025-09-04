@@ -553,7 +553,7 @@
       box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
     }
 
-    /* Contenedor principal - Carta */
+    /* Cont otro principal - Carta */
     .main-container {
       display: none;
       text-align: center;
@@ -711,7 +711,7 @@
       top: 10px;
       right: 10px;
       font-size: 1.4rem;
-      color: #ff4081;
+      color: #e91e63;
       cursor: pointer;
       width: 26px;
       height: 26px;
@@ -723,7 +723,7 @@
     }
 
     .error-content h3 {
-      color: #ff4081;
+      color: #e91e63;
       margin-bottom: 0.9rem;
       font-size: 1.25rem;
       text-align: center;
@@ -896,7 +896,7 @@
         const animate = () => {
           opacity -= 0.02;
           posX += vx;
-          posY += vy - 2; // Simula gravedad
+          posY += vy - 2;
           particle.style.opacity = opacity;
           particle.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${angle}deg)`;
           if (opacity > 0) {
@@ -1108,6 +1108,7 @@
       <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
 
+      
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
@@ -1165,8 +1166,11 @@
       }, 800);
     }
 
-    // Leer archivo como DataURL
-    function leerArchivo(file) {
+    // Leer archivo como DataURL con control de tamaño
+    async function leerArchivo(file) {
+      if (file.size > 10 * 1024 * 1024) {
+        throw new Error("La imagen es demasiado grande. Máximo 10 MB.");
+      }
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result);
@@ -1183,8 +1187,6 @@
       const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
       const fotoInput = document.getElementById('fotoPrincipal').files[0];
       const galeriaInputs = document.getElementById('fotosGaleria').files;
-      const fuenteTexto = document.getElementById('fuenteTexto').value;
-      const colorTexto = document.getElementById('colorTexto').value;
 
       if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso || !fotoInput) {
         alert('Completa todos los campos, incluyendo la foto principal.');
@@ -1194,20 +1196,44 @@
       try {
         const fotoPrincipal = await leerArchivo(fotoInput);
         const fotosGaleria = [];
+        const promises = [];
+
         for (let file of galeriaInputs) {
-          fotosGaleria.push(await leerArchivo(file));
+          promises.push(leerArchivo(file));
         }
 
-        data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fotosGaleria, fuenteTexto, colorTexto };
-        const id = Math.random().toString(36).substr(2, 6);
-        localStorage.setItem('detalle_' + id, JSON.stringify(data));
+        // Esperar a todas las promesas, incluso si algunas fallan
+        const results = await Promise.allSettled(promises);
+        for (const result of results) {
+          if (result.status === 'fulfilled') {
+            fotosGaleria.push(result.value);
+          } else {
+            console.warn("Error al cargar una imagen:", result.reason);
+          }
+        }
 
-        const link = `${window.location.href.split('#')[0]}#${id}`;
+        data = { 
+          nombreElla, 
+          nombreYo, 
+          mensaje, 
+          codigoAcceso, 
+          fotoPrincipal, 
+          fotosGaleria,
+          fuenteTexto: document.getElementById('fuenteTexto').value,
+          colorTexto: document.getElementById('colorTexto').value 
+        };
+
+        // Codificar el objeto en Base64
+        const jsonString = JSON.stringify(data);
+        const base64Data = btoa(jsonString);
+
+        // Crear el link con el hash
+        const link = `${window.location.href.split('#')[0]}#${base64Data}`;
         document.getElementById('linkInput').value = link;
         document.getElementById('linkBox').style.display = 'block';
         document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
-        alert('Error al procesar las imágenes. Inténtalo de nuevo.');
+        alert('❌ Error al procesar las imágenes. Inténtalo de nuevo.\n\n' + err.message);
       }
     }
 
@@ -1315,17 +1341,22 @@
       document.getElementById('linkBox').style.display = 'none';
     }
 
-    // Cargar detalle si hay hash
+    // Cargar detalle desde el hash
     window.addEventListener('load', () => {
       const hash = window.location.hash.slice(1);
       if (hash) {
-        const saved = localStorage.getItem('detalle_' + hash);
-        if (saved) {
-          data = JSON.parse(saved);
-          document.getElementById('createScreen').style.display = 'none';
-          document.getElementById('lockScreen').style.display = 'block';
-          document.getElementById('display').textContent = '';
-        } else {
+        try {
+          const decoded = atob(hash);
+          const saved = JSON.parse(decoded);
+          if (saved) {
+            data = saved;
+            document.getElementById('createScreen').style.display = 'none';
+            document.getElementById('lockScreen').style.display = 'block';
+            document.getElementById('display').textContent = '';
+          } else {
+            alert('❌ Detalle no encontrado.');
+          }
+        } catch (err) {
           alert('❌ Detalle no encontrado.');
         }
       }
@@ -1389,4 +1420,3 @@
     }
   </script>
 </body>
-</html>
