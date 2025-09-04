@@ -1108,6 +1108,7 @@
       <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
 
+      
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
@@ -1178,6 +1179,44 @@
       });
     }
 
+    // Comprimir imagen a 800x600 px
+    async function comprimirImagen(file) {
+      const img = new Image();
+      const url = await leerArchivo(file);
+      img.src = url;
+
+      return new Promise((resolve) => {
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 600;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Convertir a Base64 con calidad 0.8
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+          resolve(compressedDataUrl);
+        };
+      });
+    }
+
     // Generar link
     async function generarLink() {
       const nombreElla = document.getElementById('nombreElla').value.trim();
@@ -1193,12 +1232,12 @@
       }
 
       try {
-        const fotoPrincipal = await leerArchivo(fotoInput);
+        const fotoPrincipal = await comprimirImagen(fotoInput);
         const fotosGaleria = [];
         const promises = [];
 
         for (let file of galeriaInputs) {
-          promises.push(leerArchivo(file));
+          promises.push(comprimirImagen(file));
         }
 
         // Esperar a todas las promesas, incluso si algunas fallan
@@ -1425,3 +1464,4 @@
     }
   </script>
 </body>
+</html>
