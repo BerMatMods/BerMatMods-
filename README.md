@@ -10,26 +10,26 @@
 
   <style>
     :root {
-      --primary: #d500f9;
-      --secondary: #ff4081;
-      --light: #faf3ff;
-      --dark: #2d1b4e;
+      --primary: #9c27b0;
+      --secondary: #e91e63;
+      --light: #f8f0f7;
+      --dark: #333;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #fdf6fb, #f5d0f0, #e9b6e8, #f0d6f4);
-      --card-bg: rgba(255, 255, 255, 0.96);
-      --border-glow: 0 0 25px rgba(213, 0, 249, 0.7);
+      --bg-gradient: linear-gradient(135deg, #f8f0f7, #eadcf4, #f3e1f8);
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --border-glow: 0 0 20px rgba(156, 39, 176, 0.6);
       --border: 3px solid var(--primary);
     }
 
     .dark-mode {
-      --primary: #e040fb;
-      --secondary: #ff70a6;
-      --light: #3a1d5c;
-      --dark: #e4d5f9;
+      --primary: #ba68c8;
+      --secondary: #ec407a;
+      --light: #2e1a3a;
+      --dark: #e0e0e0;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #1e0f2e, #2a154a, #381b5c, #2e144c);
-      --card-bg: rgba(45, 25, 65, 0.92);
-      --border-glow: 0 0 25px rgba(224, 64, 251, 0.6);
+      --bg-gradient: linear-gradient(135deg, #2e1a3a, #3a214a, #4a2d5a);
+      --card-bg: rgba(40, 25, 45, 0.88);
+      --border-glow: 0 0 20px rgba(236, 64, 122, 0.7);
       --border: 3px solid var(--primary);
     }
 
@@ -52,16 +52,15 @@
       padding: 20px;
       overflow-x: hidden;
       position: relative;
-      cursor: default;
     }
 
-    /* Animación de borde brillante RGB mejorada */
+    /* Animación de borde brillante RGB */
     @keyframes rainbowGlow {
-      0% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
-      25% { box-shadow: 0 0 15px rgba(255, 64, 129, 0.7); }
-      50% { box-shadow: 0 0 15px rgba(255, 112, 166, 0.8); }
-      75% { box-shadow: 0 0 15px rgba(183, 86, 255, 0.7); }
-      100% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
+      0% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
+      25% { box-shadow: 0 0 15px rgba(233, 30, 99, 0.7); }
+      50% { box-shadow: 0 0 15px rgba(0, 200, 255, 0.7); }
+      75% { box-shadow: 0 0 15px rgba(255, 190, 100, 0.7); }
+      100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
     }
 
     /* Menú Hamburguesa - Izquierda */
@@ -157,7 +156,7 @@
       text-align: center;
       margin-bottom: 30px;
       padding: 20px;
-      background: rgba(213, 0, 249, 0.08);
+      background: rgba(156, 39, 176, 0.08);
       border-radius: 16px;
       width: 100%;
       border: 2px dashed var(--primary);
@@ -193,7 +192,7 @@
 
     .menu-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(213, 0, 249, 0.5);
+      box-shadow: 0 10px 25px rgba(156, 39, 176, 0.5);
     }
 
     .menu-close {
@@ -219,7 +218,7 @@
       border-radius: 20px;
       margin: 1rem 0;
       animation: rainbowGlow 3s ease-in-out infinite alternate;
-      background: linear-gradient(45deg, #d500f9, #e040fb, #ff4081, #ff70a6);
+      background: linear-gradient(45deg, #9c27b0, #ba68c8, #ec407a, #ff80ab);
       padding: 4px;
     }
 
@@ -332,7 +331,7 @@
       width: 90%;
       text-align: center;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: 3px solid #ff4081;
+      border: 3px solid #e91e63;
       position: relative;
       animation: popIn 0.4s;
     }
@@ -342,7 +341,7 @@
       top: 15px;
       right: 15px;
       font-size: 1.4em;
-      color: #ff4081;
+      color: #e91e63;
       cursor: pointer;
       background: #fff0f5;
       width: 30px;
@@ -354,7 +353,7 @@
     }
 
     .modal-error h3 {
-      color: #ff4081;
+      color: #e91e63;
       margin-bottom: 12px;
       font-size: 1.3em;
     }
@@ -431,7 +430,7 @@
       border: none;
       border-radius: 32px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(213, 0, 249, 0.4);
+      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
       transition: all 0.3s ease;
       display: block;
     }
@@ -525,7 +524,7 @@
       width: 90%;
       border: 2px solid var(--primary);
       letter-spacing: 4px;
-      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
+      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
     }
 
     .keypad {
@@ -545,12 +544,12 @@
       border-radius: 14px;
       cursor: pointer;
       transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(213, 0, 249, 0.1);
+      box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);
     }
 
     .key:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
+      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
     }
 
     /* Cont otro principal - Carta */
@@ -592,20 +591,7 @@
     }
 
     .btn-gallery {
-      display: inline-block;
-      margin: 1.4rem auto 1rem;
-      padding: 0.9rem 2rem;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: white;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(213, 0, 249, 0.4);
-      transition: all 0.3s ease;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
+      display: none;
     }
 
     footer {
@@ -667,7 +653,7 @@
         line-height: 1.6;
       }
 
-      .btn-gallery, .btn-recreate, .btn-tiktok {
+      .btn-recreate, .btn-tiktok {
         font-size: 1.1rem;
       }
 
@@ -694,73 +680,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Corazones flotantes -->
-  <script>
-    function createHearts() {
-      const hearts = ['❤️', '💖', '💕', '💓', '💗', '💞', '💘', '💝', '💟'];
-      setInterval(() => {
-        const heart = document.createElement('div');
-        heart.className = 'floating-heart';
-        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        heart.style.left = Math.random() * 90 + 5 + 'vw';
-        heart.style.bottom = '0';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 18000);
-      }, 2500);
-    }
-    createHearts();
-
-    // Efecto de partículas al tocar
-    function createParticles(x, y) {
-      const colors = ['#d500f9', '#ff4081', '#e040fb', '#ff70a6'];
-      const hearts = ['❤️', '💖', '💕', '💓', '💗'];
-      for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        particle.style.fontSize = Math.random() * 20 + 15 + 'px';
-        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        document.body.appendChild(particle);
-
-        const angle = Math.random() * 360;
-        const velocity = Math.random() * 5 + 2;
-        const vx = Math.cos(angle) * velocity;
-        const vy = Math.sin(angle) * velocity;
-
-        let opacity = 1;
-        let posX = x;
-        let posY = y;
-
-        const animate = () => {
-          opacity -= 0.02;
-          posX += vx;
-          posY += vy - 2;
-          particle.style.opacity = opacity;
-          particle.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${angle}deg)`;
-          if (opacity > 0) {
-            requestAnimationFrame(animate);
-          } else {
-            particle.remove();
-          }
-        };
-        animate();
-      }
-    }
-
-    // Detectar toque o clic
-    document.body.addEventListener('click', (e) => {
-      createParticles(e.clientX, e.clientY);
-    });
-
-    document.body.addEventListener('touchstart', (e) => {
-      for (let touch of e.touches) {
-        createParticles(touch.clientX, touch.clientY);
-      }
-    });
-  </script>
 
   <!-- Menú Hamburguesa -->
   <div class="menu-toggle" id="menuToggle">
@@ -867,11 +786,11 @@
     <div class="form-group">
       <label id="labelColor">🌈 Color del texto</label>
       <select id="colorTexto">
-        <option value="#d500f9">Morado Neón</option>
-        <option value="#ff4081">Rosa Vibrante</option>
-        <option value="#ff0000">Rojo Pasión</option>
-        <option value="#4B0082">Índigo Real</option>
-        <option value="#2F4F4F">Verde Esmeralda</option>
+        <option value="#9c27b0">Morado</option>
+        <option value="#e91e63">Rosa</option>
+        <option value="#8B0000">Rojo</option>
+        <option value="#4B0082">Índigo</option>
+        <option value="#2F4F4F">Verde</option>
       </select>
     </div>
 
@@ -948,20 +867,6 @@
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
-  <!-- Modal de zoom -->
-  <div id="zoomModal" class="modal-zoom" onclick="closeZoom()">
-    <img id="zoomedImage" src="" />
-  </div>
-
-  <!-- Cuadro de error -->
-  <div id="errorModal" class="error-modal">
-    <div class="error-content">
-      <div class="close-error" onclick="cerrarError()">×</div>
-      <h3>⚠️ Código Incorrecto</h3>
-      <p>El código que ingresaste es incorrecto. Por favor, inténtalo de nuevo.</p>
-    </div>
-  </div>
-
   <script>
     let input = '';
     let data = {};
@@ -988,7 +893,7 @@
       }, 800);
     }
 
-    // Leer archivo como DataURL con control de tamaño
+    // Leer archivo como DataURL
     async function leerArchivo(file) {
       if (file.size > 10 * 1024 * 1024) {
         throw new Error("La imagen es demasiado grande. Máximo 10 MB.");
@@ -1008,6 +913,8 @@
       const mensaje = document.getElementById('mensaje').value.trim();
       const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
       const fotoInput = document.getElementById('fotoPrincipal').files[0];
+      const fuenteTexto = document.getElementById('fuenteTexto').value;
+      const colorTexto = document.getElementById('colorTexto').value;
 
       if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso || !fotoInput) {
         alert('Completa todos los campos, incluyendo la foto principal.');
@@ -1016,28 +923,16 @@
 
       try {
         const fotoPrincipal = await leerArchivo(fotoInput);
+        data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fuenteTexto, colorTexto };
+        const id = Math.random().toString(36).substr(2, 6);
+        localStorage.setItem('detalle_' + id, JSON.stringify(data));
 
-        data = { 
-          nombreElla, 
-          nombreYo, 
-          mensaje, 
-          codigoAcceso, 
-          fotoPrincipal,
-          fuenteTexto: document.getElementById('fuenteTexto').value,
-          colorTexto: document.getElementById('colorTexto').value 
-        };
-
-        // Codificar el objeto en Base64
-        const jsonString = JSON.stringify(data);
-        const base64Data = btoa(jsonString);
-
-        // Crear el link con el hash
-        const link = `${window.location.href.split('#')[0]}#${base64Data}`;
+        const link = `${window.location.href.split('#')[0]}#${id}`;
         document.getElementById('linkInput').value = link;
         document.getElementById('linkBox').style.display = 'block';
         document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
-        alert('❌ Error al procesar las imágenes. Inténtalo de nuevo.\n\n' + err.message);
+        alert('❌ Error al procesar la imagen. Inténtalo de nuevo.\n\n' + err.message);
       }
     }
 
@@ -1103,28 +998,17 @@
       setTimeout(type, 500);
     }
 
-    function volverACrear() {
-      document.getElementById('mainContainer').style.display = 'none';
-      document.getElementById('createScreen').style.display = 'block';
-      document.getElementById('linkBox').style.display = 'none';
-    }
-
-    // Cargar detalle desde el hash
+    // Cargar detalle si hay hash
     window.addEventListener('load', () => {
       const hash = window.location.hash.slice(1);
       if (hash) {
-        try {
-          const decoded = atob(hash);
-          const saved = JSON.parse(decoded);
-          if (saved) {
-            data = saved;
-            document.getElementById('createScreen').style.display = 'none';
-            document.getElementById('lockScreen').style.display = 'block';
-            document.getElementById('display').textContent = '';
-          } else {
-            alert('❌ Detalle no encontrado.');
-          }
-        } catch (err) {
+        const saved = localStorage.getItem('detalle_' + hash);
+        if (saved) {
+          data = JSON.parse(saved);
+          document.getElementById('createScreen').style.display = 'none';
+          document.getElementById('lockScreen').style.display = 'block';
+          document.getElementById('display').textContent = '';
+        } else {
           alert('❌ Detalle no encontrado.');
         }
       }
@@ -1186,5 +1070,12 @@
     function aboutProject() {
       alert(`✨ Detalles Virtuales v1.0\n\nCreado por: AnthZz Berrocal\nMarca: BerMatMods\n\nUn proyecto romántico y personalizado para expresar amor de forma digital.\n\n© 2025 BerMatMods`);
     }
+
+    function volverACrear() {
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('createScreen').style.display = 'block';
+      document.getElementById('linkBox').style.display = 'none';
+    }
   </script>
 </body>
+</html>
