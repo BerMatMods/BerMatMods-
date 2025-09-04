@@ -10,26 +10,26 @@
 
   <style>
     :root {
-      --primary: #9c27b0;
-      --secondary: #e91e63;
-      --light: #f8f0f7;
-      --dark: #333;
+      --primary: #d500f9;
+      --secondary: #ff4081;
+      --light: #faf3ff;
+      --dark: #2d1b4e;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #f8f0f7, #eadcf4, #f3e1f8);
-      --card-bg: rgba(255, 255, 255, 0.94);
-      --border-glow: 0 0 20px rgba(156, 39, 176, 0.6);
+      --bg-gradient: linear-gradient(135deg, #fdf6fb, #f5d0f0, #e9b6e8, #f0d6f4);
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --border-glow: 0 0 25px rgba(213, 0, 249, 0.7);
       --border: 3px solid var(--primary);
     }
 
     .dark-mode {
-      --primary: #ba68c8;
-      --secondary: #ec407a;
-      --light: #2e1a3a;
-      --dark: #e0e0e0;
+      --primary: #e040fb;
+      --secondary: #ff70a6;
+      --light: #3a1d5c;
+      --dark: #e4d5f9;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #2e1a3a, #3a214a, #4a2d5a);
-      --card-bg: rgba(40, 25, 45, 0.88);
-      --border-glow: 0 0 20px rgba(236, 64, 122, 0.7);
+      --bg-gradient: linear-gradient(135deg, #1e0f2e, #2a154a, #381b5c, #2e144c);
+      --card-bg: rgba(45, 25, 65, 0.92);
+      --border-glow: 0 0 25px rgba(224, 64, 251, 0.6);
       --border: 3px solid var(--primary);
     }
 
@@ -52,15 +52,16 @@
       padding: 20px;
       overflow-x: hidden;
       position: relative;
+      cursor: default;
     }
 
-    /* Animación de borde brillante RGB */
+    /* Animación de borde brillante RGB mejorada */
     @keyframes rainbowGlow {
-      0% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
-      25% { box-shadow: 0 0 15px rgba(233, 30, 99, 0.7); }
-      50% { box-shadow: 0 0 15px rgba(0, 200, 255, 0.7); }
-      75% { box-shadow: 0 0 15px rgba(255, 190, 100, 0.7); }
-      100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
+      0% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
+      25% { box-shadow: 0 0 15px rgba(255, 64, 129, 0.7); }
+      50% { box-shadow: 0 0 15px rgba(255, 112, 166, 0.8); }
+      75% { box-shadow: 0 0 15px rgba(183, 86, 255, 0.7); }
+      100% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
     }
 
     /* Menú Hamburguesa - Izquierda */
@@ -156,7 +157,7 @@
       text-align: center;
       margin-bottom: 30px;
       padding: 20px;
-      background: rgba(156, 39, 176, 0.08);
+      background: rgba(213, 0, 249, 0.08);
       border-radius: 16px;
       width: 100%;
       border: 2px dashed var(--primary);
@@ -192,7 +193,7 @@
 
     .menu-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(156, 39, 176, 0.5);
+      box-shadow: 0 10px 25px rgba(213, 0, 249, 0.5);
     }
 
     .menu-close {
@@ -218,7 +219,7 @@
       border-radius: 20px;
       margin: 1rem 0;
       animation: rainbowGlow 3s ease-in-out infinite alternate;
-      background: linear-gradient(45deg, #9c27b0, #ba68c8, #ec407a, #ff80ab);
+      background: linear-gradient(45deg, #d500f9, #e040fb, #ff4081, #ff70a6);
       padding: 4px;
     }
 
@@ -331,7 +332,7 @@
       width: 90%;
       text-align: center;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: 3px solid #e91e63;
+      border: 3px solid #ff4081;
       position: relative;
       animation: popIn 0.4s;
     }
@@ -341,7 +342,7 @@
       top: 15px;
       right: 15px;
       font-size: 1.4em;
-      color: #e91e63;
+      color: #ff4081;
       cursor: pointer;
       background: #fff0f5;
       width: 30px;
@@ -353,7 +354,7 @@
     }
 
     .modal-error h3 {
-      color: #e91e63;
+      color: #ff4081;
       margin-bottom: 12px;
       font-size: 1.3em;
     }
@@ -430,7 +431,7 @@
       border: none;
       border-radius: 32px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
+      box-shadow: 0 8px 20px rgba(213, 0, 249, 0.4);
       transition: all 0.3s ease;
       display: block;
     }
@@ -524,7 +525,7 @@
       width: 90%;
       border: 2px solid var(--primary);
       letter-spacing: 4px;
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
     }
 
     .keypad {
@@ -544,12 +545,12 @@
       border-radius: 14px;
       cursor: pointer;
       transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);
+      box-shadow: 0 4px 10px rgba(213, 0, 249, 0.1);
     }
 
     .key:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
     }
 
     /* Contenedor principal - Carta */
@@ -602,7 +603,7 @@
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
+      box-shadow: 0 8px 20px rgba(213, 0, 249, 0.4);
       transition: all 0.3s ease;
       animation: rainbowGlow 3s ease-in-out infinite alternate;
     }
@@ -667,7 +668,7 @@
       max-height: 90%;
       border-radius: 15px;
       border: 5px solid var(--primary);
-      box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
+      box-shadow: 0 0 30px rgba(213, 0, 249, 0.8);
       animation: fadeIn 0.3s;
     }
 
@@ -710,7 +711,7 @@
       top: 10px;
       right: 10px;
       font-size: 1.4rem;
-      color: #e91e63;
+      color: #ff4081;
       cursor: pointer;
       width: 26px;
       height: 26px;
@@ -722,7 +723,7 @@
     }
 
     .error-content h3 {
-      color: #e91e63;
+      color: #ff4081;
       margin-bottom: 0.9rem;
       font-size: 1.25rem;
       text-align: center;
@@ -762,6 +763,15 @@
     @keyframes fadeHeart {
       0%, 100% { opacity: 0.6; }
       50% { opacity: 1; }
+    }
+
+    /* Partículas de explosión */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1000;
+      user-select: none;
+      opacity: 0;
     }
 
     /* Créditos */
@@ -859,6 +869,56 @@
       }, 2500);
     }
     createHearts();
+
+    // Efecto de partículas al tocar
+    function createParticles(x, y) {
+      const colors = ['#d500f9', '#ff4081', '#e040fb', '#ff70a6'];
+      const hearts = ['❤️', '💖', '💕', '💓', '💗'];
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        particle.style.fontSize = Math.random() * 20 + 15 + 'px';
+        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        document.body.appendChild(particle);
+
+        const angle = Math.random() * 360;
+        const velocity = Math.random() * 5 + 2;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+
+        let opacity = 1;
+        let posX = x;
+        let posY = y;
+
+        const animate = () => {
+          opacity -= 0.02;
+          posX += vx;
+          posY += vy - 2; // Simula gravedad
+          particle.style.opacity = opacity;
+          particle.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${angle}deg)`;
+          if (opacity > 0) {
+            requestAnimationFrame(animate);
+          } else {
+            particle.remove();
+          }
+        };
+        animate();
+      }
+    }
+
+    // Detectar toque o clic
+    document.body.addEventListener('click', (e) => {
+      createParticles(e.clientX, e.clientY);
+    });
+
+    document.body.addEventListener('touchstart', (e) => {
+      for (let touch of e.touches) {
+        createParticles(touch.clientX, touch.clientY);
+      }
+    });
   </script>
 
   <!-- Menú Hamburguesa -->
@@ -886,7 +946,7 @@
       🎵 Música de Fondo <span id="musicStatus">▶️</span>
     </button>
 
-    <a href="https://wa.me/937556459?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
+    <a href="https://wa.me/930569195?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
       📞 Consulta Personalizada
     </a>
 
@@ -966,11 +1026,11 @@
     <div class="form-group">
       <label id="labelColor">🌈 Color del texto</label>
       <select id="colorTexto">
-        <option value="#9c27b0">Morado</option>
-        <option value="#e91e63">Rosa</option>
-        <option value="#8B0000">Rojo</option>
-        <option value="#4B0082">Índigo</option>
-        <option value="#2F4F4F">Verde</option>
+        <option value="#d500f9">Morado Neón</option>
+        <option value="#ff4081">Rosa Vibrante</option>
+        <option value="#ff0000">Rojo Pasión</option>
+        <option value="#4B0082">Índigo Real</option>
+        <option value="#2F4F4F">Verde Esmeralda</option>
       </select>
     </div>
 
@@ -1048,8 +1108,6 @@
       <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
 
-      <button class="btn-recreate" onclick="volverACrear()">🔄 Volver a personalizar</button>
-    </div>
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
