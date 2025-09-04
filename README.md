@@ -1,1081 +1,492 @@
 
-<html lang="es" id="htmlLang">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Detalles Virtuales - Tu Carta de Amor</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500&family=Quicksand:wght@500&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>FELIZ DÍA DE LAS FLORES AMARILLAS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #9c27b0;
-      --secondary: #e91e63;
-      --light: #f8f0f7;
-      --dark: #333;
-      --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #f8f0f7, #eadcf4, #f3e1f8);
-      --card-bg: rgba(255, 255, 255, 0.94);
-      --border-glow: 0 0 20px rgba(156, 39, 176, 0.6);
-      --border: 3px solid var(--primary);
-    }
-
-    .dark-mode {
-      --primary: #ba68c8;
-      --secondary: #ec407a;
-      --light: #2e1a3a;
-      --dark: #e0e0e0;
-      --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #2e1a3a, #3a214a, #4a2d5a);
-      --card-bg: rgba(40, 25, 45, 0.88);
-      --border-glow: 0 0 20px rgba(236, 64, 122, 0.7);
-      --border: 3px solid var(--primary);
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      transition: background 0.4s, color 0.4s, box-shadow 0.3s;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--dark);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      perspective: 3000px;
+      cursor: grab;
+      font-family: 'Quicksand', sans-serif;
     }
 
-    /* Animación de borde brillante RGB */
-    @keyframes rainbowGlow {
-      0% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
-      25% { box-shadow: 0 0 15px rgba(233, 30, 99, 0.7); }
-      50% { box-shadow: 0 0 15px rgba(0, 200, 255, 0.7); }
-      75% { box-shadow: 0 0 15px rgba(255, 190, 100, 0.7); }
-      100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
-    }
+    body:active { cursor: grabbing; }
 
-    /* Menú Hamburguesa - Izquierda */
-    .menu-toggle {
+    /* Fondo de girasoles suave */
+    body::before {
+      content: '';
       position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-      background: var(--card-bg);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://i.postimg.cc/MTKPqRCZ/Girasoles.jpg');
+      background-size: cover;
+      filter: blur(12px);
+      opacity: 0.1;
+      z-index: -3;
+    }
+
+    /* Overlay cálido */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(10,5,0,0.8), rgba(20,10,0,0.95));
+      z-index: -2;
+    }
+
+    /* Estrellas sutiles */
+    .stars {
+      position: fixed;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: #fff9c4;
       border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 1001;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      border: 3px solid transparent;
-      animation: pulse 2s infinite alternate;
+      box-shadow: 0 0 6px #fff9c4;
+      opacity: 0.7;
+      animation: twinkle 4s infinite alternate;
     }
 
-    .menu-toggle span {
-      display: block;
-      width: 26px;
-      height: 3px;
-      background: var(--primary);
-      margin: 3px 0;
-      border-radius: 2px;
-      transition: 0.3s;
+    @keyframes twinkle {
+      to { opacity: 1; transform: scale(1.4); }
     }
 
-    .menu-toggle.active {
-      border: 3px solid var(--primary);
-      animation: rainbowGlow 2s ease-in-out infinite;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.05); }
-    }
-
-    /* Menú desplegable */
-    .menu-panel {
+    /* Escena 3D */
+    .scene {
       position: fixed;
-      top: 0;
-      left: -320px;
-      width: 300px;
+      width: 100vw;
       height: 100vh;
-      background: var(--card-bg);
-      box-shadow: 10px 0 30px rgba(0,0,0,0.15);
-      border-right: var(--border);
-      z-index: 1000;
-      transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      padding: 80px 20px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-y: auto;
+      transform-style: preserve-3d;
+      transform: rotateX(10deg);
+      transition: transform 0.1s ease;
     }
 
-    .menu-panel.active {
-      left: 0;
-      animation: slideIn 0.5s forwards;
-    }
-
-    @keyframes slideIn {
-      from { transform: translateX(-100%); opacity: 0.8; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    .menu-panel h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--primary);
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-      text-align: center;
-    }
-
-    .menu-profile {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      background: rgba(156, 39, 176, 0.08);
-      border-radius: 16px;
-      width: 100%;
-      border: 2px dashed var(--primary);
-    }
-
-    .menu-profile h4 {
-      color: var(--primary);
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .menu-profile p {
-      color: var(--dark);
-      font-size: 0.95rem;
-    }
-
-    .menu-btn {
-      display: block;
-      width: 100%;
-      padding: 14px 20px;
-      margin: 10px 0;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      color: white;
-      border: none;
-      border-radius: 14px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      box-shadow: var(--border-glow);
-      transition: all 0.3s;
-    }
-
-    .menu-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(156, 39, 176, 0.5);
-    }
-
-    .menu-close {
+    /* Universos paralelos */
+    .universe {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 1.8rem;
-      color: var(--primary);
-      cursor: pointer;
-      background: #fff;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .glow-frame {
-      position: relative;
-      display: inline-block;
-      border-radius: 20px;
-      margin: 1rem 0;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
-      background: linear-gradient(45deg, #9c27b0, #ba68c8, #ec407a, #ff80ab);
-      padding: 4px;
-    }
-
-    .glow-frame img {
-      border-radius: 18px;
-      display: block;
-      width: 100%;
-      height: auto;
-      border: 4px solid #fff;
-      filter: brightness(1) blur(0.5px);
-      transition: transform 0.3s ease;
-    }
-
-    .glow-frame img:hover {
-      transform: scale(1.03);
-    }
-
-    /* Modal: Requisito TikTok (solo al generar) */
-    .modal-tiktok {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.4s;
+      transform-style: preserve-3d;
     }
 
-    .modal-tiktok-content {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 25px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: var(--border);
-      position: relative;
-      animation: popIn 0.4s;
-    }
+    .universe-front { transform: translateZ(600px); }
+    .universe-back { transform: translateZ(-600px) rotateY(180deg); }
 
-    .modal-tiktok-close {
+    /* Contenedor */
+    .container {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.4em;
-      color: var(--primary);
-      cursor: pointer;
-      background: #fff;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      transform-style: preserve-3d;
     }
 
-    .modal-tiktok-title {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 15px;
-      font-size: 1.5em;
-    }
-
-    .btn-tiktok {
-      margin: 15px auto;
-      padding: 12px 20px;
-      background: #000000;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1.1em;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 80%;
-      max-width: 300px;
-    }
-
-    .btn-tiktok::before {
-      content: "🎵";
-    }
-
-    /* Modal: Error si no sigue */
-    .modal-error {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-error-content {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 25px;
-      max-width: 400px;
-      width: 90%;
+    /* Título principal */
+    .title {
+      font-family: 'Pacifico', cursive;
+      font-size: 5rem;
+      color: #ffeb3b;
       text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: 3px solid #e91e63;
-      position: relative;
-      animation: popIn 0.4s;
+      text-shadow: 
+        0 0 20px #ffeb3b,
+        0 0 40px #fdd835,
+        0 0 70px rgba(251,192,45,0.8);
+      letter-spacing: 5px;
+      margin: 4rem 0;
+      transform: translateZ(200px);
     }
 
-    .modal-error-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.4em;
-      color: #e91e63;
-      cursor: pointer;
-      background: #fff0f5;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Fase */
+    .phase {
+      transform-style: preserve-3d;
+      margin: 12rem 0;
+      opacity: 0;
+      transition: opacity 2s ease;
     }
 
-    .modal-error h3 {
-      color: #e91e63;
-      margin-bottom: 12px;
-      font-size: 1.3em;
-    }
-
-    .modal-error p {
-      color: var(--dark);
-      line-height: 1.6;
-      font-size: 0.95em;
-    }
-
-    /* Animaciones */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    /* Pantalla de creación */
-    .create-screen {
-      text-align: center;
-      padding: 1.8rem 2rem;
-      max-width: 480px;
-      background: var(--card-bg);
-      border-radius: 32px;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.15);
-      border: var(--border);
-      position: relative;
-      z-index: 1;
-      margin-bottom: 25px;
-    }
-
-    .create-screen h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
-      color: var(--primary);
-      margin: 1rem 0;
-    }
-
-    .form-group {
-      margin: 1.2rem 0;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin-bottom: 8px;
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 0.95em;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 2px solid var(--primary);
-      border-radius: 14px;
-      font-size: 1em;
-      background: rgba(255,255,255,0.7);
-      color: var(--dark);
-      font-family: inherit;
-    }
-
-    button {
-      margin: 1.3rem auto;
-      padding: 0.9rem 2rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      color: white;
-      border: none;
-      border-radius: 32px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
-      transition: all 0.3s ease;
-      display: block;
-    }
-
-    /* Cuadro de link generado */
-    .link-box {
-      display: none;
-      margin: 20px auto;
-      padding: 20px;
-      background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: var(--border-glow);
-      max-width: 460px;
-      text-align: center;
-      border: var(--border);
-      animation: fadeIn 0.5s;
-    }
-
-    .link-box h3 {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 12px;
-    }
-
-    .link-box input {
-      width: 100%;
-      margin: 12px 0;
-      padding: 14px;
-      border: 2px solid var(--primary);
-      border-radius: 14px;
-      font-size: 1em;
-      text-align: center;
-      background: rgba(255,255,255,0.8);
-      color: var(--primary);
-      font-family: monospace;
-      letter-spacing: 1px;
-    }
-
-    .link-actions {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .link-actions button {
-      margin: 0;
-      padding: 10px 18px;
-      font-size: 1em;
-      background: var(--secondary);
-      width: auto;
-    }
-
-    /* Pantalla de bloqueo */
-    .lock-screen {
-      display: none;
-      text-align: center;
-      padding: 1.8rem 2rem;
-      max-width: 440px;
-      background: var(--card-bg);
-      border-radius: 32px;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.15);
-      border: var(--border);
-      position: relative;
-      z-index: 1;
-    }
-
-    .lock-screen h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
-      color: var(--primary);
-      margin: 1rem 0;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
-    }
-
-    .lock-screen p {
-      color: var(--primary);
-      font-size: 1.15rem;
-      margin-bottom: 1.3rem;
-      font-weight: 500;
-    }
-
-    .key-display {
-      font-family: 'Poppins', monospace;
-      font-size: 1.8rem;
-      color: var(--primary);
-      background: rgba(255,255,255,0.7);
-      padding: 0.9rem 1.3rem;
-      border-radius: 16px;
-      margin: 1.1rem auto;
-      width: 90%;
-      border: 2px solid var(--primary);
-      letter-spacing: 4px;
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
-    }
-
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 1.3rem 0;
-    }
-
-    .key {
-      font-size: 1.45rem;
-      font-weight: 600;
-      padding: 1rem 0;
-      background: rgba(255,255,255,0.7);
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);
-    }
-
-    .key:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
-    }
-
-    /* Cont otro principal - Carta */
-    .main-container {
-      display: none;
-      text-align: center;
-      max-width: 95%;
-      padding: 1.8rem 1.4rem;
-    }
-
-    .letter-frame {
-      background: var(--card-bg);
-      border-radius: 30px;
-      padding: 1.8rem 1.6rem;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-      border: var(--border);
-      position: relative;
-      margin-bottom: 1.6rem;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.3rem;
-      color: var(--primary);
-      margin-bottom: 1.4rem;
-    }
-
-    .letter {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.55rem;
-      line-height: 1.65;
-      color: var(--primary);
-      text-align: left;
-      white-space: pre-line;
-      letter-spacing: 0.8px;
-      margin: 0;
+    .phase.visible {
       opacity: 1;
+    }
+
+    .phase h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 4rem;
+      color: #fff352;
+      text-shadow: 
+        0 0 20px #fff352,
+        0 0 40px #fdd835;
+      margin-bottom: 2.5rem;
+      transform: translateZ(150px);
+    }
+
+    /* Cuadro de texto */
+    .text-box {
+      background: rgba(30,20,0,0.6);
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      border: 3px solid #ffeb3b;
+      box-shadow: 0 0 25px #fdd835;
+      transform: translateZ(100px);
+      position: relative;
+    }
+
+    .text-box::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 2px solid #fff352;
+      border-radius: 20px;
+      box-shadow: 0 0 15px #fff352;
+      pointer-events: none;
+    }
+
+    .text-box p {
+      font-size: 1.6rem;
+      line-height: 2;
+      color: #fff9c4;
       font-weight: 500;
     }
 
-    .btn-gallery {
-      display: none;
+    .text-box em {
+      color: #fff352;
+      font-weight: 600;
     }
 
-    footer {
-      margin-top: 1.4rem;
-      font-style: italic;
-      color: var(--primary);
-      font-size: 1.1rem;
+    /* Cubo 3D */
+    .cube-container {
+      width: 350px;
+      height: 350px;
+      perspective: 1000px;
+      margin: 3rem auto;
+      transform: translateZ(180px);
     }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
+    }
+
+    .face {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border: 4px solid #ffeb3b;
+      border-radius: 16px;
+      box-shadow: 0 0 25px #fdd835;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .face::before {
+      content: '';
+      position: absolute;
+      inset: 4px;
+      border: 1px solid #fff352;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #fff352;
+      pointer-events: none;
+    }
+
+    .face img {
+      width: 90%;
+      height: 90%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .front  { transform: translateZ(175px); }
+    .back   { transform: rotateY(180deg) translateZ(175px); }
+    .right  { transform: rotateY(90deg) translateZ(175px); }
+    .left   { transform: rotateY(-90deg) translateZ(175px); }
+    .top    { transform: rotateX(90deg) translateZ(175px); }
+    .bottom { transform: rotateX(-90deg) translateZ(175px); }
 
     /* Créditos */
-    .credit {
-      margin-top: 25px;
-      padding: 15px;
-      font-size: 0.9em;
-      color: var(--primary);
-      font-weight: 600;
+    .credits {
+      transform: translateZ(150px);
+      margin-top: 10rem;
+      font-size: 1.4rem;
+      color: #ccc;
       text-align: center;
-      font-style: italic;
-      background: var(--card-bg);
-      border-radius: 18px;
-      border: 2px solid var(--primary);
-      box-shadow: var(--border-glow);
-      max-width: 400px;
-      width: 90%;
     }
 
-    /* Botón para volver a personalizar */
-    .btn-recreate {
-      margin-top: 1.4rem;
-      padding: 0.9rem 2rem;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: white;
-      background: linear-gradient(45deg, #4a148c, #7b1fa2);
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(74, 20, 140, 0.4);
-      transition: all 0.3s ease;
+    .credits strong {
+      color: #ffeb3b;
     }
 
-    .btn-recreate:hover {
-      transform: scale(1.05);
+    .credits em {
+      color: #fdd835;
     }
 
-    /* Responsive */
-    @media (max-width: 480px) {
-      .create-screen, .lock-screen, .main-container, .credit {
-        padding: 1.4rem;
-        max-width: 98%;
-      }
+    /* Palabras que caen */
+    .word {
+      position: absolute;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      color: #ffeb3b;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+      white-space: nowrap;
+      text-shadow: 0 0 8px #ffeb3b;
+      animation: fall 15s linear forwards;
+    }
 
-      h1 {
-        font-size: 2rem;
-      }
+    .word.white {
+      color: #fff;
+      text-shadow: 0 0 8px #fff;
+    }
 
-      .letter {
-        font-size: 1.4rem;
-        line-height: 1.6;
-      }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(1400px); opacity: 0; }
+    }
 
-      .btn-recreate, .btn-tiktok {
-        font-size: 1.1rem;
-      }
+    /* Explosión de frases */
+    .burst {
+      position: absolute;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: #ffeb3b;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2000;
+      text-shadow: 0 0 10px #ffeb3b;
+    }
 
-      .menu-toggle {
-        top: 15px;
-        left: 15px;
-        width: 45px;
-        height: 45px;
-      }
+    .burst.animate {
+      animation: explode 2.2s ease-out forwards;
+    }
 
-      .menu-toggle span {
-        width: 22px;
-        height: 2.5px;
-      }
-
-      .menu-panel {
-        width: 280px;
-      }
-
-      .menu-panel h3 {
-        font-size: 1.6rem;
-      }
+    @keyframes explode {
+      0% { transform: scale(0); opacity: 0; }
+      15% { opacity: 1; }
+      100% { transform: translate(var(--x), var(--y)) scale(2.2); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Menú Hamburguesa -->
-  <div class="menu-toggle" id="menuToggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div class="overlay"></div>
+  <div class="stars" id="stars"></div>
 
-  <div class="menu-panel" id="menuPanel">
-    <div class="menu-close" onclick="closeMenu()">×</div>
-    <h3>✨ Menú BerMatMods</h3>
-
-    <div class="menu-profile">
-      <h4>AnthZz Berrocal</h4>
-      <p>Desarrollador | BerMatMods</p>
-      <p>Detalles virtuales únicos y románticos</p>
-    </div>
-
-    <button class="menu-btn glow-frame" onclick="toggleDarkMode()">
-      🌙 Modo Oscuro
-    </button>
-
-    <button class="menu-btn glow-frame" onclick="toggleMusic()">
-      🎵 Música de Fondo <span id="musicStatus">▶️</span>
-    </button>
-
-    <a href="https://wa.me/930569195?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
-      📞 Consulta Personalizada
-    </a>
-
-    <button class="menu-btn glow-frame" onclick="shareProject()">
-      📱 Compartir Proyecto
-    </button>
-
-    <button class="menu-btn glow-frame" onclick="aboutProject()">
-      🧾 Acerca del Proyecto
-    </button>
-
-    <button class="menu-btn glow-frame" onclick="location.reload()">
-      🔄 Recargar
-    </button>
-  </div>
-
-  <!-- Modal: Seguir en TikTok (solo al generar) -->
-  <div id="modalTiktok" class="modal-tiktok">
-    <div class="modal-tiktok-content">
-      <div class="modal-tiktok-close" onclick="closeModalTiktok()">×</div>
-      <h3 class="modal-tiktok-title">🔔 ¡Importante!</h3>
-      <p style="color:var(--dark); margin:10px 0;">
-        Para generar tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
-      </p>
-      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok" onclick="seguirYGenerar()">
-        Seguir en TikTok
-      </a>
-      <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>
-    </div>
-  </div>
-
-  <!-- Modal: Error si no sigue -->
-  <div id="modalError" class="modal-error">
-    <div class="modal-error-content">
-      <div class="modal-error-close" onclick="closeModalError()">×</div>
-      <h3>⚠️ Acceso Denegado</h3>
-      <p>
-        El sistema de <strong>BerMatMods</strong> ha detectado que no has hecho clic en "Seguir en TikTok".
-        <br><br>
-        Por lo tanto, no se podrá generar tu enlace de detalle personalizado.
-        <br><br>
-        Inténtalo más tarde.
-      </p>
-    </div>
-  </div>
-
-  <!-- Pantalla de creación -->
-  <div id="createScreen" class="create-screen">
-    <h2 id="createTitle">✨ Crea tu Detalle Virtual</h2>
-    <p id="createSubtitle">Llena todo y genera tu link personalizado ❤️</p>
-
-    <div class="form-group">
-      <label id="labelPara">💌 Para: Nombre de tu amor</label>
-      <input type="text" id="nombreElla" placeholder="Ej: Jhorgina Briyidth" required />
-    </div>
-
-    <div class="form-group">
-      <label id="labelDe">👨‍❤️‍💋‍👨 De: Tu nombre</label>
-      <input type="text" id="nombreYo" placeholder="Ej: AnthZz Berrocal" required />
-    </div>
-
-    <div class="form-group">
-      <label id="labelMensaje">✍️ Tu mensaje (usa saltos de línea)</label>
-      <textarea id="mensaje" placeholder="Mi amor, desde que te conocí..." required></textarea>
-    </div>
-
-    <div class="form-group">
-      <label id="labelFuente">🎨 Tipo de letra</label>
-      <select id="fuenteTexto">
-        <option value="'Dancing Script', cursive">Elegante (Script)</option>
-        <option value="'Quicksand', sans-serif">Moderna (Quicksand)</option>
-        <option value="'Poppins', sans-serif">Clara (Poppins)</option>
-        <option value="Arial, sans-serif">Simple (Arial)</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label id="labelColor">🌈 Color del texto</label>
-      <select id="colorTexto">
-        <option value="#9c27b0">Morado</option>
-        <option value="#e91e63">Rosa</option>
-        <option value="#8B0000">Rojo</option>
-        <option value="#4B0082">Índigo</option>
-        <option value="#2F4F4F">Verde</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label id="labelCodigo">🔐 Código de acceso (ej: 10/11/23)</label>
-      <input type="text" id="codigoAcceso" placeholder="Ej: 10/11/23" value="10/11/23" required />
-    </div>
-
-    <div class="form-group">
-      <label id="labelFoto">🖼️ Foto principal</label>
-      <input type="file" id="fotoPrincipal" accept="image/*" />
-    </div>
-
-    <button onclick="mostrarModalTikTok()">Generar Link 🌟</button>
-
-    <!-- Cuadro de link generado -->
-    <div class="link-box" id="linkBox">
-      <h3 id="linkTitle">🔗 ¡Listo! Tu link está creado</h3>
-      <input type="text" id="linkInput" readonly />
-      <div class="link-actions">
-        <button onclick="copyLink()"><span id="btnCopiar">📋 Copiar Link</span></button>
-        <button onclick="shareOnWhatsApp()"><span id="btnWhatsApp">💬 Enviar por WhatsApp</span></button>
+  <div class="scene" id="scene">
+    
+    <!-- Universo Delante -->
+    <div class="universe universe-front">
+      <div class="container">
+        <h1 class="title">FELIZ DÍA DE LAS FLORES AMARILLAS</h1>
+        <script>document.write(generatePhases())</script>
       </div>
     </div>
-  </div>
 
-  <!-- Pantalla de bloqueo -->
-  <div id="lockScreen" class="lock-screen">
-    <h2>🔐 Tu Carta Mi Amor</h2>
-    <p>👇 INGRESA EL CÓDIGO DE ACCESO 👇</p>
-
-    <div class="glow-frame">
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif" alt="Corazones flotando" />
-    </div>
-
-    <div id="display" class="key-display"></div>
-
-    <div class="keypad">
-      <div class="key" onclick="addDigit('1')">1</div>
-      <div class="key" onclick="addDigit('2')">2</div>
-      <div class="key" onclick="addDigit('3')">3</div>
-      <div class="key" onclick="addDigit('4')">4</div>
-      <div class="key" onclick="addDigit('5')">5</div>
-      <div class="key" onclick="addDigit('6')">6</div>
-      <div class="key" onclick="addDigit('7')">7</div>
-      <div class="key" onclick="addDigit('8')">8</div>
-      <div class="key" onclick="addDigit('9')">9</div>
-      <div class="key" onclick="addDigit('0')">0</div>
-      <div class="key" onclick="addDigit('/')">/</div>
-      <div class="key" onclick="clearInput()">⌫</div>
-    </div>
-
-    <button class="btn-iniciar" onclick="submitKey()">Iniciar</button>
-
-    <div class="glow-frame">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif" alt="Bailarina de amor" />
-    </div>
-  </div>
-
-  <!-- Carta principal -->
-  <div id="mainContainer" class="main-container">
-    <div class="letter-frame">
-      <h1 id="tituloCarta"></h1>
-      <div id="letter" class="letter"></div>
-
-      <div class="glow-frame" style="margin: 1.4rem auto; max-width: 400px; display: flex; justify-content: center;">
-        <img id="fotoPrincipalMostrada" src="" alt="Foto principal" />
+    <!-- Universo Detrás -->
+    <div class="universe universe-back">
+      <div class="container">
+        <h1 class="title">FELIZ DÍA DE LAS FLORES AMARILLAS</h1>
+        <script>document.write(generatePhases())</script>
       </div>
-
-      <footer id="firmaCarta"></footer>
-
-      <button class="btn-recreate" onclick="volverACrear()">🔄 Volver a personalizar</button>
     </div>
-    <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
+
   </div>
+
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/01/10/audio_7f7a9b5b25.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    let input = '';
-    let data = {};
+    // Generar fases
+    function generatePhases() {
+      const phases = [
+        { t: "Recuerdo", img1: "ramo-proncipal.jpg", img2: "Girasoles.jpg" },
+        { t: "Esperanza", img1: "Girasoles.jpg", img2: "ramo-proncipal.jpg" },
+        { t: "Amor", img1: "ramo-proncipal.jpg", img2: "Girasoles.jpg" },
+        { t: "Eternidad", img1: "Girasoles.jpg", img2: "ramo-proncipal.jpg" }
+      ];
 
-    // Mostrar modal de TikTok al hacer clic en "Generar"
-    function mostrarModalTikTok() {
-      document.getElementById('modalTiktok').style.display = 'flex';
-    }
-
-    function closeModalTiktok() {
-      document.getElementById('modalTiktok').style.display = 'none';
-    }
-
-    function closeModalError() {
-      document.getElementById('modalError').style.display = 'none';
-    }
-
-    // Cuando hace clic en "Seguir", se guarda y genera el link
-    function seguirYGenerar() {
-      localStorage.setItem('tiktokFollowed', 'true');
-      setTimeout(() => {
-        generarLink();
-        document.getElementById('modalTiktok').style.display = 'none';
-      }, 800);
-    }
-
-    // Leer archivo como DataURL
-    async function leerArchivo(file) {
-      if (file.size > 10 * 1024 * 1024) {
-        throw new Error("La imagen es demasiado grande. Máximo 10 MB.");
-      }
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
+      let html = '';
+      phases.forEach(p => {
+        html += `
+        <div class="phase">
+          <h2>${p.t}</h2>
+          <div class="cube-container">
+            <div class="cube">
+              <div class="face front"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
+              <div class="face back"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
+              <div class="face right"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
+              <div class="face left"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
+              <div class="face top"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
+              <div class="face bottom"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
+            </div>
+          </div>
+          <div class="text-box">
+            <p><em>El amor verdadero</em> no se mide en días,<br>
+            se mide en latidos.<br>
+            Y tú,<br>
+            <em>sigues siendo mi flor amarilla</em>,<br>
+            mi luz en la oscuridad.</p>
+          </div>
+        </div>`;
       });
+
+      html += `<div class="credits">
+        🌼 Detalle virtual creado con amor por 
+        <strong>AnthZz Berrocal</strong> | 
+        <em>BerMatMods</em> | 
+        <a href="https://github.com/tu-usuario" style="color:#fff352">GitHub Pages</a>
+      </div>`;
+
+      return html;
     }
 
-    // Generar link
-    async function generarLink() {
-      const nombreElla = document.getElementById('nombreElla').value.trim();
-      const nombreYo = document.getElementById('nombreYo').value.trim();
-      const mensaje = document.getElementById('mensaje').value.trim();
-      const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
-      const fotoInput = document.getElementById('fotoPrincipal').files[0];
-      const fuenteTexto = document.getElementById('fuenteTexto').value;
-      const colorTexto = document.getElementById('colorTexto').value;
+    // Control 3D: automático + manual
+    let rotX = 10, rotY = 0;
+    let isDragging = false, startX, startY;
+    const scene = document.getElementById('scene');
 
-      if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso || !fotoInput) {
-        alert('Completa todos los campos, incluyendo la foto principal.');
-        return;
+    // Giro automático lento
+    setInterval(() => {
+      if (!isDragging) {
+        rotY += 0.1;
+        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
       }
+    }, 50);
 
-      try {
-        const fotoPrincipal = await leerArchivo(fotoInput);
-        data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fuenteTexto, colorTexto };
-        const id = Math.random().toString(36).substr(2, 6);
-        localStorage.setItem('detalle_' + id, JSON.stringify(data));
+    // Control manual
+    scene.addEventListener('mousedown', e => {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
 
-        const link = `${window.location.href.split('#')[0]}#${id}`;
-        document.getElementById('linkInput').value = link;
-        document.getElementById('linkBox').style.display = 'block';
-        document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        alert('❌ Error al procesar la imagen. Inténtalo de nuevo.\n\n' + err.message);
-      }
-    }
-
-    function copyLink() {
-      const link = document.getElementById('linkInput').value;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('✅ Link copiado');
-      });
-    }
-
-    function shareOnWhatsApp() {
-      const link = document.getElementById('linkInput').value;
-      const text = `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    }
-
-    // Pantalla de bloqueo
-    function addDigit(digit) {
-      if (input.length < 10) {
-        input += digit;
-        document.getElementById('display').textContent = input;
-      }
-    }
-
-    function clearInput() {
-      input = '';
-      document.getElementById('display').textContent = '';
-    }
-
-    function cerrarError() {
-      document.getElementById('errorModal').classList.remove('active');
-    }
-
-    function submitKey() {
-      if (input === data.codigoAcceso) {
-        document.getElementById('lockScreen').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
-        mostrarCarta();
-      } else {
-        document.getElementById('errorModal').classList.add('active');
-        clearInput();
-      }
-    }
-
-    function mostrarCarta() {
-      document.getElementById('tituloCarta').textContent = `Para Ti ${data.nombreElla} 💖`;
-      document.getElementById('firmaCarta').textContent = `Con todo mi corazón, ${data.nombreYo}`;
-      document.getElementById('fotoPrincipalMostrada').src = data.fotoPrincipal;
-
-      const letter = document.getElementById('letter');
-      letter.style.fontFamily = data.fuenteTexto;
-      letter.style.color = data.colorTexto;
-      letter.textContent = '';
-      let i = 0;
-      const speed = 40;
-      function type() {
-        if (i < data.mensaje.length) {
-          letter.textContent += data.mensaje.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      setTimeout(type, 500);
-    }
-
-    // Cargar detalle si hay hash
-    window.addEventListener('load', () => {
-      const hash = window.location.hash.slice(1);
-      if (hash) {
-        const saved = localStorage.getItem('detalle_' + hash);
-        if (saved) {
-          data = JSON.parse(saved);
-          document.getElementById('createScreen').style.display = 'none';
-          document.getElementById('lockScreen').style.display = 'block';
-          document.getElementById('display').textContent = '';
-        } else {
-          alert('❌ Detalle no encontrado.');
-        }
+    document.addEventListener('mousemove', e => {
+      if (isDragging) {
+        rotY += (e.clientX - startX) * 0.2;
+        rotX -= (e.clientY - startY) * 0.2;
+        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        startX = e.clientX;
+        startY = e.clientY;
       }
     });
 
-    // === MENÚ FUNCIONES ===
-    const menuToggle = document.getElementById('menuToggle');
-    const menuPanel = document.getElementById('menuPanel');
-
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      menuPanel.classList.toggle('active');
+    ['mouseup', 'mouseleave'].forEach(event => {
+      document.addEventListener(event, () => isDragging = false);
     });
 
-    function closeMenu() {
-      menuToggle.classList.remove('active');
-      menuPanel.classList.remove('active');
-    }
+    // Touch para móvil
+    scene.addEventListener('touchstart', e => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    });
 
-    // Modo oscuro
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark-mode');
-    }
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    }
-
-    // Música de fondo
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
-    audio.loop = true;
-    let isPlaying = false;
-
-    function toggleMusic() {
-      const btn = document.getElementById('musicStatus');
-      if (isPlaying) {
-        audio.pause();
-        btn.textContent = '▶️';
-      } else {
-        audio.play().catch(e => alert('Activa el sonido para escuchar la música.'));
-        btn.textContent = '⏸️';
+    document.addEventListener('touchmove', e => {
+      if (isDragging) {
+        e.preventDefault();
+        rotY += (e.touches[0].clientX - startX) * 0.2;
+        rotX -= (e.touches[0].clientY - startY) * 0.2;
+        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
       }
-      isPlaying = !isPlaying;
-    }
+    }, { passive: false });
 
-    // Compartir proyecto
-    function shareProject() {
-      const text = "Mira este detalle virtual tan romántico 💖\n\nPuedes crear uno personalizado aquí: " + window.location.href;
-      if (navigator.share) {
-        navigator.share({ text });
-      } else {
-        navigator.clipboard.writeText(text).then(() => {
-          alert('Enlace copiado 📲');
-        });
+    document.addEventListener('touchend', () => isDragging = false);
+
+    // Música al primer clic
+    let musicStarted = false;
+    document.addEventListener('click', () => {
+      if (!musicStarted) {
+        document.getElementById('music').play().catch(() => {});
+        musicStarted = true;
       }
+    }, { once: true });
+
+    // Explosión de frases al tocar
+    document.addEventListener('click', e => {
+      const phrases = [
+        "Te amo mi amor", "Eres mi reina", "Mi niña hermosa", "Mi vida", "Te adoro", 
+        "Mi corazón", "Mi eternidad", "Eres todo", "Te extraño", "Mi alma gemela"
+      ];
+      for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+          const w = document.createElement('div');
+          w.classList.add('burst');
+          w.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+          w.style.left = `${e.clientX}px`;
+          w.style.top = `${e.clientY}px`;
+
+          const a = Math.random() * 360;
+          const d = 80 + Math.random() * 200;
+          const vx = Math.cos(a * Math.PI / 180) * d;
+          const vy = Math.sin(a * Math.PI / 180) * d;
+
+          w.style.setProperty('--x', `${vx}px`);
+          w.style.setProperty('--y', `${vy}px`);
+
+          document.body.appendChild(w);
+          setTimeout(() => w.classList.add('animate'), 10);
+          setTimeout(() => w.remove(), 2200);
+        }, i * 10);
+      }
+    });
+
+    // Lluvia de palabras amorosas
+    const words = ["Amor", "Corazón", "Recuerdo", "Eternidad", "Luz", "Sonrisa", "Esperanza", "Flores", "Amarillo", "Siempre", "Tú", "Brillo", "Paz", "Abrazo", "Vida", "Destino", "Alma", "Verano", "Cariño", "Sueño", "Latido", "Eterno", "Flor", "Rostro", "Mañana", "Reina", "Hermosa", "Mi Todo", "Mi Amor", "Mi Vida"];
+    setInterval(() => {
+      const w = document.createElement('div');
+      w.classList.add('word');
+      if (Math.random() > 0.6) w.classList.add('white');
+      w.textContent = words[Math.floor(Math.random() * words.length)];
+      w.style.left = Math.random() * 100 + 'vw';
+      w.style.top = '-50px';
+      document.body.appendChild(w);
+      setTimeout(() => w.remove(), 15000);
+    }, 100);
+
+    // Estrellas
+    const stars = document.getElementById('stars');
+    for (let i = 0; i < 250; i++) {
+      const s = document.createElement('div');
+      s.classList.add('star');
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.opacity = Math.random() * 0.8 + 0.2;
+      s.style.animationDelay = Math.random() * 5 + 's';
+      stars.appendChild(s);
     }
 
-    // Acerca del proyecto
-    function aboutProject() {
-      alert(`✨ Detalles Virtuales v1.0\n\nCreado por: AnthZz Berrocal\nMarca: BerMatMods\n\nUn proyecto romántico y personalizado para expresar amor de forma digital.\n\n© 2025 BerMatMods`);
-    }
-
-    function volverACrear() {
-      document.getElementById('mainContainer').style.display = 'none';
-      document.getElementById('createScreen').style.display = 'block';
-      document.getElementById('linkBox').style.display = 'none';
-    }
+    // Revelar fases al scroll
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.phase').forEach(p => {
+        const r = p.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.8) p.classList.add('visible');
+      });
+    });
   </script>
+
 </body>
 </html>
