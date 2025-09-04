@@ -615,165 +615,6 @@
       font-size: 1.1rem;
     }
 
-    /* Galería */
-    .gallery-screen {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 900px;
-      padding: 2rem 1.4rem;
-      text-align: center;
-    }
-
-    .gallery-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1.6rem;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
-    }
-
-    .gallery-main-img {
-      width: 100%;
-      max-width: 480px;
-      margin-bottom: 1.8rem;
-    }
-
-    .gallery-thumbnails {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 10px;
-      width: 100%;
-      max-width: 580px;
-    }
-
-    /* Modal de zoom */
-    .modal-zoom {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      cursor: zoom-out;
-    }
-
-    .modal-zoom img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 15px;
-      border: 5px solid var(--primary);
-      box-shadow: 0 0 30px rgba(213, 0, 249, 0.8);
-      animation: fadeIn 0.3s;
-    }
-
-    /* Cuadro de error */
-    .error-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .error-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .error-content {
-      background: white;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 360px;
-      padding: 1.6rem;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      border: 3px solid #ffb6c1;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .close-error {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.4rem;
-      color: #e91e63;
-      cursor: pointer;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      background: #fff0f5;
-    }
-
-    .error-content h3 {
-      color: #e91e63;
-      margin-bottom: 0.9rem;
-      font-size: 1.25rem;
-      text-align: center;
-    }
-
-    .error-content p {
-      color: #555;
-      line-height: 1.55;
-      margin-bottom: 1.3rem;
-      font-size: 1.02rem;
-    }
-
-    /* Corazones flotantes */
-    .floating-heart {
-      position: fixed;
-      font-size: 18px;
-      pointer-events: none;
-      opacity: 0;
-      z-index: 1000;
-      user-select: none;
-      animation: floatUp 18s ease-out forwards, fadeHeart 4s ease-in-out infinite;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% {
-        transform: translateY(-20vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeHeart {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    /* Partículas de explosión */
-    .particle {
-      position: absolute;
-      pointer-events: none;
-      z-index: 1000;
-      user-select: none;
-      opacity: 0;
-    }
-
     /* Créditos */
     .credit {
       margin-top: 25px;
@@ -812,7 +653,7 @@
 
     /* Responsive */
     @media (max-width: 480px) {
-      .create-screen, .lock-screen, .main-container, .gallery-screen, .credit {
+      .create-screen, .lock-screen, .main-container, .credit {
         padding: 1.4rem;
         max-width: 98%;
       }
@@ -1044,11 +885,6 @@
       <input type="file" id="fotoPrincipal" accept="image/*" />
     </div>
 
-    <div class="form-group">
-      <label id="labelGaleria">🖼️ Fotos para galería (múltiples)</label>
-      <input type="file" id="fotosGaleria" accept="image/*" multiple />
-    </div>
-
     <button onclick="mostrarModalTikTok()">Generar Link 🌟</button>
 
     <!-- Cuadro de link generado -->
@@ -1105,24 +941,10 @@
         <img id="fotoPrincipalMostrada" src="" alt="Foto principal" />
       </div>
 
-      <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
 
-      
-    <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
-  </div>
-
-  <!-- Galería -->
-  <div id="galleryScreen" class="gallery-screen">
-    <h2 class="gallery-title">✨ Nuestra Galería</h2>
-
-    <div class="glow-frame gallery-main-img">
-      <img id="mainGalleryImg" src="" style="width: 100%; border-radius: 18px;" onclick="zoomImage(this)" />
+      <button class="btn-recreate" onclick="volverACrear()">🔄 Volver a personalizar</button>
     </div>
-
-    <div class="gallery-thumbnails" id="thumbnailsContainer"></div>
-
-    <button class="btn-iniciar" style="margin-top: 1.8rem;" onclick="closeGallery()">Volver a la carta</button>
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
@@ -1179,44 +1001,6 @@
       });
     }
 
-    // Comprimir imagen a 800x600 px
-    async function comprimirImagen(file) {
-      const img = new Image();
-      const url = await leerArchivo(file);
-      img.src = url;
-
-      return new Promise((resolve) => {
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 800;
-          const MAX_HEIGHT = 600;
-          let width = img.width;
-          let height = img.height;
-
-          if (width > height) {
-            if (width > MAX_WIDTH) {
-              height *= MAX_WIDTH / width;
-              width = MAX_WIDTH;
-            }
-          } else {
-            if (height > MAX_HEIGHT) {
-              width *= MAX_HEIGHT / height;
-              height = MAX_HEIGHT;
-            }
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          // Convertir a Base64 con calidad 0.8
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
-          resolve(compressedDataUrl);
-        };
-      });
-    }
-
     // Generar link
     async function generarLink() {
       const nombreElla = document.getElementById('nombreElla').value.trim();
@@ -1224,7 +1008,6 @@
       const mensaje = document.getElementById('mensaje').value.trim();
       const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
       const fotoInput = document.getElementById('fotoPrincipal').files[0];
-      const galeriaInputs = document.getElementById('fotosGaleria').files;
 
       if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso || !fotoInput) {
         alert('Completa todos los campos, incluyendo la foto principal.');
@@ -1232,31 +1015,14 @@
       }
 
       try {
-        const fotoPrincipal = await comprimirImagen(fotoInput);
-        const fotosGaleria = [];
-        const promises = [];
-
-        for (let file of galeriaInputs) {
-          promises.push(comprimirImagen(file));
-        }
-
-        // Esperar a todas las promesas, incluso si algunas fallan
-        const results = await Promise.allSettled(promises);
-        for (const result of results) {
-          if (result.status === 'fulfilled') {
-            fotosGaleria.push(result.value);
-          } else {
-            console.warn("Error al cargar una imagen:", result.reason);
-          }
-        }
+        const fotoPrincipal = await leerArchivo(fotoInput);
 
         data = { 
           nombreElla, 
           nombreYo, 
           mensaje, 
           codigoAcceso, 
-          fotoPrincipal, 
-          fotosGaleria,
+          fotoPrincipal,
           fuenteTexto: document.getElementById('fuenteTexto').value,
           colorTexto: document.getElementById('colorTexto').value 
         };
@@ -1265,15 +1031,9 @@
         const jsonString = JSON.stringify(data);
         const base64Data = btoa(jsonString);
 
-        // Verificar si el URL sería demasiado largo
-        const url = `${window.location.href.split('#')[0]}#${base64Data}`;
-        if (url.length > 2000) {
-          alert('❌ El detalle es demasiado grande. Por favor, reduce el tamaño de las imágenes.');
-          return;
-        }
-
         // Crear el link con el hash
-        document.getElementById('linkInput').value = url;
+        const link = `${window.location.href.split('#')[0]}#${base64Data}`;
+        document.getElementById('linkInput').value = link;
         document.getElementById('linkBox').style.display = 'block';
         document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
@@ -1341,42 +1101,6 @@
         }
       }
       setTimeout(type, 500);
-    }
-
-    function openGallery() {
-      if (data.fotosGaleria && data.fotosGaleria.length > 0) {
-        document.getElementById('mainGalleryImg').src = data.fotosGaleria[0];
-        const thumbs = document.getElementById('thumbnailsContainer');
-        thumbs.innerHTML = '';
-        data.fotosGaleria.forEach(foto => {
-          const div = document.createElement('div');
-          div.className = 'glow-frame';
-          const img = document.createElement('img');
-          img.src = foto;
-          img.className = 'gallery-img';
-          img.onclick = () => document.getElementById('mainGalleryImg').src = foto;
-          div.appendChild(img);
-          thumbs.appendChild(div);
-        });
-      } else {
-        alert('No hay fotos en la galería.');
-      }
-      document.getElementById('mainContainer').style.display = 'none';
-      document.getElementById('galleryScreen').style.display = 'flex';
-    }
-
-    function closeGallery() {
-      document.getElementById('galleryScreen').style.display = 'none';
-      document.getElementById('mainContainer').style.display = 'block';
-    }
-
-    function zoomImage(img) {
-      document.getElementById('zoomedImage').src = img.src;
-      document.getElementById('zoomModal').style.display = 'flex';
-    }
-
-    function closeZoom() {
-      document.getElementById('zoomModal').style.display = 'none';
     }
 
     function volverACrear() {
@@ -1464,4 +1188,3 @@
     }
   </script>
 </body>
-</html>
