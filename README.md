@@ -1108,7 +1108,6 @@
       <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
 
-      
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
@@ -1227,9 +1226,15 @@
         const jsonString = JSON.stringify(data);
         const base64Data = btoa(jsonString);
 
+        // Verificar si el URL sería demasiado largo
+        const url = `${window.location.href.split('#')[0]}#${base64Data}`;
+        if (url.length > 2000) {
+          alert('❌ El detalle es demasiado grande. Por favor, reduce el tamaño de las imágenes.');
+          return;
+        }
+
         // Crear el link con el hash
-        const link = `${window.location.href.split('#')[0]}#${base64Data}`;
-        document.getElementById('linkInput').value = link;
+        document.getElementById('linkInput').value = url;
         document.getElementById('linkBox').style.display = 'block';
         document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
