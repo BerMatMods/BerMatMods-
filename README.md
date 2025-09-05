@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>FELIZ DÍA DE LAS FLORES AMARILLAS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Con Amor, Para Ti 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,169 +13,237 @@
     }
 
     body {
-      background: #000;
-      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff5f8, #f8bbd0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       overflow: hidden;
-      perspective: 3000px;
-      cursor: grab;
-      font-family: 'Quicksand', sans-serif;
+      position: relative;
+      touch-action: none;
+      color: #c2185b;
+      user-select: none;
     }
 
-    body:active { cursor: grabbing; }
-
-    /* Fondo de girasoles suave */
-    body::before {
-      content: '';
+    /* === PANTALLA DE BLOQUEO (full screen, difuminado) === */
+    #lock-screen {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: url('https://i.postimg.cc/MTKPqRCZ/Girasoles.jpg');
-      background-size: cover;
-      filter: blur(12px);
-      opacity: 0.1;
-      z-index: -3;
-    }
-
-    /* Overlay cálido */
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, rgba(10,5,0,0.8), rgba(20,10,0,0.95));
-      z-index: -2;
-    }
-
-    /* Estrellas sutiles */
-    .stars {
-      position: fixed;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px; height: 2px;
-      background: #fff9c4;
-      border-radius: 50%;
-      box-shadow: 0 0 6px #fff9c4;
-      opacity: 0.7;
-      animation: twinkle 4s infinite alternate;
-    }
-
-    @keyframes twinkle {
-      to { opacity: 1; transform: scale(1.4); }
-    }
-
-    /* Escena 3D */
-    .scene {
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      transform-style: preserve-3d;
-      transform: rotateX(10deg);
-      transition: transform 0.1s ease;
-    }
-
-    /* Universos paralelos */
-    .universe {
-      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      transform-style: preserve-3d;
-    }
-
-    .universe-front { transform: translateZ(600px); }
-    .universe-back { transform: translateZ(-600px) rotateY(180deg); }
-
-    /* Contenedor */
-    .container {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      transform-style: preserve-3d;
-    }
-
-    /* Título principal */
-    .title {
-      font-family: 'Pacifico', cursive;
-      font-size: 5rem;
-      color: #ffeb3b;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      text-shadow: 
-        0 0 20px #ffeb3b,
-        0 0 40px #fdd835,
-        0 0 70px rgba(251,192,45,0.8);
-      letter-spacing: 5px;
-      margin: 4rem 0;
-      transform: translateZ(200px);
     }
 
-    /* Fase */
-    .phase {
-      transform-style: preserve-3d;
-      margin: 12rem 0;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
-
-    .phase.visible {
-      opacity: 1;
-    }
-
-    .phase h2 {
-      font-family: 'Pacifico', cursive;
-      font-size: 4rem;
-      color: #fff352;
-      text-shadow: 
-        0 0 20px #fff352,
-        0 0 40px #fdd835;
-      margin-bottom: 2.5rem;
-      transform: translateZ(150px);
-    }
-
-    /* Cuadro de texto */
-    .text-box {
-      background: rgba(30,20,0,0.6);
-      border-radius: 24px;
-      padding: 2.5rem;
-      margin: 2rem auto;
-      max-width: 800px;
-      border: 3px solid #ffeb3b;
-      box-shadow: 0 0 25px #fdd835;
-      transform: translateZ(100px);
+    /* === CUADRO DE ADVERTENCIA CON X DENTRO === */
+    .warning-box {
       position: relative;
-    }
-
-    .text-box::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 2px solid #fff352;
+      width: 85%;
+      max-width: 400px;
+      background: rgba(30, 0, 40, 0.95);
+      border: 3px solid #ff4081;
       border-radius: 20px;
-      box-shadow: 0 0 15px #fff352;
-      pointer-events: none;
+      padding: 30px 20px 25px;
+      color: #f8bbd0;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 
+        0 0 20px rgba(255, 64, 129, 0.6),
+        0 0 40px rgba(233, 30, 99, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
     }
 
-    .text-box p {
-      font-size: 1.6rem;
-      line-height: 2;
-      color: #fff9c4;
-      font-weight: 500;
+    .close-btn {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 32px;
+      height: 32px;
+      background: #ff1744;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      transition: all 0.3s ease;
     }
 
-    .text-box em {
-      color: #fff352;
+    .close-btn:hover {
+      transform: scale(1.1);
+      background: #e91e63;
+    }
+
+    .warning-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      color: #ff80ab;
+      margin-bottom: 15px;
+      text-shadow: 0 0 8px rgba(255, 64, 129, 0.5);
+    }
+
+    .warning-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #f8bbd0;
+      margin-bottom: 20px;
+    }
+
+    .follow-btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
       font-weight: 600;
+      background: #ff4081;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.7);
+      transition: all 0.3s ease;
     }
 
-    /* Cubo 3D */
-    .cube-container {
-      width: 350px;
-      height: 350px;
-      perspective: 1000px;
-      margin: 3rem auto;
-      transform: translateZ(180px);
+    .follow-btn:hover {
+      background: #e91e63;
+      transform: scale(1.05);
+    }
+
+    /* === LLUVIA DE PALABRAS EN BLOQUEO === */
+    .lock-word {
+      position: absolute;
+      top: -50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: #ff80ab;
+      pointer-events: none;
+      opacity: 0;
+      white-space: nowrap;
+      z-index: 9998;
+      animation: fallLock linear forwards;
+      text-shadow: 0 0 10px #ff4081;
+    }
+
+    @keyframes fallLock {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+
+    /* === TÍTULO UNIVERSAL === */
+    .title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #ff4081;
+      text-align: center;
+      margin: 30px 20px 40px;
+      padding: 20px 30px;
+      z-index: 10;
+      background: rgba(255, 245, 248, 0.4);
+      border-radius: 20px;
+      box-shadow: 
+        0 0 15px #ff80ab,
+        0 0 30px #ff4081,
+        0 0 50px #e91e63,
+        0 0 70px rgba(233, 30, 99, 0.5);
+      text-shadow: 
+        0 0 10px #ff80ab,
+        0 0 20px #e91e63,
+        0 0 40px #ff4081;
+      border: 3px solid #ff1744;
+      backdrop-filter: blur(8px);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    /* === LLUVIA DE PALABRAS ROMÁNTICAS (sorpresa) === */
+    .romantic-word {
+      position: absolute;
+      top: -50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #e91e63;
+      pointer-events: none;
+      opacity: 0;
+      white-space: nowrap;
+      z-index: 1;
+      transform: none;
+      animation: fallWords linear forwards;
+      text-shadow: 
+        0 0 10px #ff80ab,
+        0 0 20px #ff4081;
+    }
+
+    @keyframes fallWords {
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(130vh); opacity: 0; }
+    }
+
+    /* === CORAZONES FLOTANTES === */
+    .floating-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 16px;
+      opacity: 0.8;
+      z-index: 2;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 8px #ff4081);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    /* === MARIPOSAS VOLANDO === */
+    .butterfly {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-image: url('https://i.pinimg.com/originals/7f/6e/5f/7f6e5f1d5b9f4e9d3c9c9c9c9c9c9c9c.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 0 10px #ff80ab);
+      z-index: 2;
+      opacity: 0.9;
+      animation: fly linear infinite;
+    }
+
+    @keyframes fly {
+      0% { transform: translateX(-100px) translateY(100vh) rotate(20deg); }
+      100% { transform: translateX(calc(100vw + 100px)) translateY(-20vh) rotate(-20deg); }
+    }
+
+    /* === CUBO 3D INTERACTIVO === */
+    .container {
+      width: 90vmin;
+      height: 90vmin;
+      max-width: 440px;
+      max-height: 440px;
+      perspective: 3000px;
+      margin: 20px auto 40px;
+      position: relative;
+      z-index: 3;
+      cursor: grab;
     }
 
     .cube {
@@ -183,310 +251,545 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.1s ease;
+      transition: none;
+      transform: rotateX(15deg) rotateY(25deg);
     }
 
     .face {
       position: absolute;
-      width: 350px;
-      height: 350px;
-      border: 4px solid #ffeb3b;
-      border-radius: 16px;
-      box-shadow: 0 0 25px #fdd835;
-      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      box-shadow: 
+        0 0 0 6px #ff1744,
+        0 0 25px #ff4081,
+        0 0 50px #e91e63,
+        0 0 80px rgba(233, 30, 99, 0.5);
+      border-radius: 12px;
       display: flex;
       justify-content: center;
       align-items: center;
+      backface-visibility: visible;
+      overflow: hidden;
     }
 
-    .face::before {
+    .front  { transform: translateZ(110px); }
+    .back   { transform: translateZ(-110px) rotateY(180deg); }
+    .right  { transform: translateX(110px) rotateY(90deg); }
+    .left   { transform: translateX(-110px) rotateY(-90deg); }
+    .top    { transform: translateY(-110px) rotateX(90deg); }
+    .bottom { transform: translateY(110px) rotateX(-90deg); }
+
+    .gif-frame {
+      width: 85%;
+      height: 85%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 4px solid #fff;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.9);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .gif-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* === CARTA CON MOVIMIENTO 3D === */
+    .letter-container {
+      width: 90%;
+      max-width: 460px;
+      background: rgba(255, 245, 248, 0.7);
+      border: 3px solid #ff1744;
+      border-radius: 25px;
+      padding: 30px;
+      margin: 20px 20px 40px;
+      position: relative;
+      z-index: 4;
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        0 0 20px #ff80ab,
+        0 0 40px rgba(233, 30, 99, 0.4);
+      cursor: grab;
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
+    }
+
+    .letter-container::before {
       content: '';
       position: absolute;
-      inset: 4px;
-      border: 1px solid #fff352;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #fff352;
+      inset: -6px;
+      border-radius: 30px;
+      border: 3px solid #ff4081;
+      animation: pulse-border 1.5s infinite alternate;
       pointer-events: none;
+      box-shadow: 0 0 30px rgba(233, 30, 99, 0.7);
     }
 
-    .face img {
-      width: 90%;
-      height: 90%;
-      object-fit: cover;
-      border-radius: 10px;
+    @keyframes pulse-border {
+      from { opacity: 0.7; }
+      to { opacity: 1; box-shadow: 0 0 60px rgba(255, 64, 129, 0.9); }
     }
 
-    .front  { transform: translateZ(175px); }
-    .back   { transform: rotateY(180deg) translateZ(175px); }
-    .right  { transform: rotateY(90deg) translateZ(175px); }
-    .left   { transform: rotateY(-90deg) translateZ(175px); }
-    .top    { transform: rotateX(90deg) translateZ(175px); }
-    .bottom { transform: rotateX(-90deg) translateZ(175px); }
-
-    /* Créditos */
-    .credits {
-      transform: translateZ(150px);
-      margin-top: 10rem;
-      font-size: 1.4rem;
-      color: #ccc;
+    .letter-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 38px;
+      color: #d81b60;
       text-align: center;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
     }
 
-    .credits strong {
-      color: #ffeb3b;
+    .letter-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      color: #880e4f;
+      line-height: 1.9;
+      text-align: justify;
+      margin-bottom: 18px;
     }
 
-    .credits em {
-      color: #fdd835;
+    .kiss-gif {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
     }
 
-    /* Palabras que caen */
-    .word {
+    .kiss-frame {
+      width: 130px;
+      height: 130px;
+      border: 4px solid #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+      background: #fff;
+    }
+
+    .kiss-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .letter-signature {
+      font-family: 'Great Vibes', cursive;
+      font-size: 26px;
+      color: #b71c1c;
+      text-align: right;
+      margin-top: 20px;
+      font-style: italic;
+      text-shadow: 0 0 8px rgba(255, 64, 129, 0.5);
+    }
+
+    /* === CORAZONES DE EXPLOSIÓN === */
+    .heart-particle {
       position: absolute;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.8rem;
-      color: #ffeb3b;
-      opacity: 0;
+      font-size: 24px;
       pointer-events: none;
+      z-index: 1000;
+      opacity: 0;
+      user-select: none;
+      filter: drop-shadow(0 0 10px #ff4081) saturate(1.8) brightness(1.4);
+    }
+
+    /* === BOTÓN DE MÚSICA === */
+    #music-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       z-index: 100;
-      white-space: nowrap;
-      text-shadow: 0 0 8px #ffeb3b;
-      animation: fall 15s linear forwards;
+      background: #ff4081;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 64, 129, 0.7);
+      transition: all 0.3s ease;
     }
 
-    .word.white {
-      color: #fff;
-      text-shadow: 0 0 8px #fff;
+    #music-button:hover {
+      transform: scale(1.05);
+      background: #e91e63;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(-100px); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(1400px); opacity: 0; }
+    /* === RELOJ DE PERÚ (solo después del desbloqueo) === */
+    .clock-container {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255, 245, 248, 0.6);
+      border: 3px solid #ff4081;
+      border-radius: 20px;
+      padding: 15px;
+      margin: 10px 0 30px;
+      text-align: center;
+      z-index: 5;
+      backdrop-filter: blur(6px);
+      box-shadow: 
+        0 0 15px #ff80ab,
+        0 0 30px rgba(233, 30, 99, 0.4);
     }
 
-    /* Explosión de frases */
-    .burst {
+    .clock-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      color: #d81b60;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .clock {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      color: #e91e63;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* === Firma del creador === */
+    .signature {
       position: absolute;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.5rem;
-      color: #ffeb3b;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 2000;
-      text-shadow: 0 0 10px #ffeb3b;
-    }
-
-    .burst.animate {
-      animation: explode 2.2s ease-out forwards;
-    }
-
-    @keyframes explode {
-      0% { transform: scale(0); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translate(var(--x), var(--y)) scale(2.2); opacity: 0; }
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #d81b60;
+      z-index: 10;
+      text-shadow: 
+        0 0 10px #ff80ab,
+        0 0 20px #ff4081;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 8px 20px;
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
 <body>
 
-  <div class="overlay"></div>
-  <div class="stars" id="stars"></div>
+  <!-- === PANTALLA DE BLOQUEO === -->
+  <div id="lock-screen">
+    <!-- Lluvia de palabras en toda la pantalla -->
+    <script>
+      const lockWords = ['Sígueme en TikTok 💖', 'Sígueme @bermat_mods', 'No te lo pierdas 💕', 'Te espera algo lindo 🌸', 'Sígueme ya ❤️', 'Solo un follow 💝'];
+      
+      function createLockWord() {
+        const w = document.createElement('div');
+        w.className = 'lock-word';
+        w.textContent = lockWords[Math.floor(Math.random() * lockWords.length)];
+        w.style.left = Math.random() * 90 + 5 + 'vw';
+        w.style.animationDuration = (6 + Math.random() * 8) + 's';
+        document.getElementById('lock-screen').appendChild(w);
+        setTimeout(() => w.remove(), 10000);
+      }
 
-  <div class="scene" id="scene">
-    
-    <!-- Universo Delante -->
-    <div class="universe universe-front">
-      <div class="container">
-        <h1 class="title">FELIZ DÍA DE LAS FLORES AMARILLAS</h1>
-        <script>document.write(generatePhases())</script>
-      </div>
+      setInterval(createLockWord, 300);
+      for (let i = 0; i < 30; i++) setTimeout(createLockWord, 200 * i);
+    </script>
+
+    <!-- Cuadro bonito con advertencia -->
+    <div class="warning-box">
+      <div class="close-btn" onclick="document.getElementById('alert').style.display='block';">×</div>
+      <h3 class="warning-title">🎁 ¡Sorpresa Especial!</h3>
+      <p class="warning-text">
+        Para ver esta dedicatoria, debes seguir a <strong>@bermat_mods</strong> en TikTok.
+      </p>
+      <button class="follow-btn" onclick="followTikTok()">Seguir en TikTok</button>
     </div>
 
-    <!-- Universo Detrás -->
-    <div class="universe universe-back">
-      <div class="container">
-        <h1 class="title">FELIZ DÍA DE LAS FLORES AMARILLAS</h1>
-        <script>document.write(generatePhases())</script>
-      </div>
+    <!-- Alerta si cierra sin seguir -->
+    <div class="warning-box" id="alert" style="display:none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 350px;">
+      <div class="close-btn" onclick="this.parentElement.style.display='none';">×</div>
+      <h3 class="warning-title">⚠️ Advertencia</h3>
+      <p class="warning-text">
+        El sistema ha detectado que no me siguió en TikTok. Por favor, sígueme para ver la sorpresa.
+      </p>
+      <button class="follow-btn" onclick="followTikTok()">Seguir ahora</button>
     </div>
-
   </div>
 
-  <audio id="music" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/01/10/audio_7f7a9b5b25.mp3" type="audio/mpeg">
-  </audio>
+  <!-- === CONTENIDO DE LA SORPRESA (se muestra después del desbloqueo) === -->
 
+  <!-- TÍTULO -->
+  <h1 class="title">Con Amor, Para Ti 💖</h1>
+
+  <!-- LLUVIA DE PALABRAS ROMÁNTICAS -->
   <script>
-    // Generar fases
-    function generatePhases() {
-      const phases = [
-        { t: "Recuerdo", img1: "ramo-proncipal.jpg", img2: "Girasoles.jpg" },
-        { t: "Esperanza", img1: "Girasoles.jpg", img2: "ramo-proncipal.jpg" },
-        { t: "Amor", img1: "ramo-proncipal.jpg", img2: "Girasoles.jpg" },
-        { t: "Eternidad", img1: "Girasoles.jpg", img2: "ramo-proncipal.jpg" }
-      ];
-
-      let html = '';
-      phases.forEach(p => {
-        html += `
-        <div class="phase">
-          <h2>${p.t}</h2>
-          <div class="cube-container">
-            <div class="cube">
-              <div class="face front"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
-              <div class="face back"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
-              <div class="face right"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
-              <div class="face left"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
-              <div class="face top"><img src="https://i.postimg.cc/VNFGx4HH/${p.img1}"></div>
-              <div class="face bottom"><img src="https://i.postimg.cc/MTKPqRCZ/${p.img2}"></div>
-            </div>
-          </div>
-          <div class="text-box">
-            <p><em>El amor verdadero</em> no se mide en días,<br>
-            se mide en latidos.<br>
-            Y tú,<br>
-            <em>sigues siendo mi flor amarilla</em>,<br>
-            mi luz en la oscuridad.</p>
-          </div>
-        </div>`;
-      });
-
-      html += `<div class="credits">
-        🌼 Detalle virtual creado con amor por 
-        <strong>AnthZz Berrocal</strong> | 
-        <em>BerMatMods</em> | 
-        <a href="https://github.com/tu-usuario" style="color:#fff352">GitHub Pages</a>
-      </div>`;
-
-      return html;
+    const palabras = ['Amor', 'Eternidad', 'Mi vida', 'Siempre', 'Corazón', 'Tuyo', 'Nunca te suelto', 'Alma gemela', 'Te amo', 'Mi todo', 'Feliz contigo', 'Sólo tú', 'Te necesito', 'Hoy y siempre', 'Mi amor', 'Te adoro'];
+    
+    function crearPalabra() {
+      const p = document.createElement('div');
+      p.className = 'romantic-word';
+      const palabra = palabras[Math.floor(Math.random() * palabras.length)];
+      p.innerHTML = `💖 ${palabra}`;
+      p.style.left = Math.random() * 80 + 10 + 'vw';
+      p.style.animationDuration = (6 + Math.random() * 8) + 's';
+      p.style.opacity = 0;
+      document.body.appendChild(p);
+      setTimeout(() => { p.style.opacity = 1; }, 50);
+      setTimeout(() => { if (p.parentNode) p.remove(); }, 10000);
     }
 
-    // Control 3D: automático + manual
-    let rotX = 10, rotY = 0;
-    let isDragging = false, startX, startY;
-    const scene = document.getElementById('scene');
+    setInterval(crearPalabra, 200);
+    for (let i = 0; i < 40; i++) setTimeout(crearPalabra, 100 * i);
+  </script>
 
-    // Giro automático lento
+  <!-- CORAZONES FLOTANTES -->
+  <script>
+    const hearts = ['💖', '💗', '💕', '💓', '❤️', '💘', '💝'];
     setInterval(() => {
-      if (!isDragging) {
-        rotY += 0.1;
-        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-      }
-    }, 50);
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.opacity = 0;
+      heart.style.animationDuration = (8 + Math.random() * 10) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }, 800);
+  </script>
 
-    // Control manual
-    scene.addEventListener('mousedown', e => {
+  <!-- MARIPOSAS VOLANDO -->
+  <script>
+    setInterval(() => {
+      const butterfly = document.createElement('div');
+      butterfly.className = 'butterfly';
+      butterfly.style.left = '-100px';
+      butterfly.style.top = (Math.random() * 80 + 10) + 'vh';
+      butterfly.style.animationDuration = (30 + Math.random() * 20) + 's';
+      butterfly.style.opacity = Math.random() * 0.6 + 0.4;
+      document.body.appendChild(butterfly);
+      setTimeout(() => butterfly.remove(), 50000);
+    }, 5000);
+  </script>
+
+  <!-- CUBO 3D -->
+  <div class="container" id="container">
+    <div class="cube" id="cube">
+      <div class="face front"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+      <div class="face back"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+      <div class="face right"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+      <div class="face left"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+      <div class="face top"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+      <div class="face bottom"><div class="gif-frame"><img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUya2g4cjV4bDZlbzY0dGhmdGlvbG11emwzNTFpdjhoY3A2ZzM2cXAwdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/A5VAEBsxxqLaU/giphy.gif" alt="Corazón"></div></div>
+    </div>
+  </div>
+
+  <!-- CARTA DE AMOR -->
+  <div class="letter-container" id="letter">
+    <h2 class="letter-title">Para Ti, Con Amor 💕</h2>
+    <p class="letter-text">
+      Hoy quiero recordarte lo especial que eres. Cada día a tu lado es un regalo, cada sonrisa tuya ilumina mi mundo.
+    </p>
+    <p class="letter-text">
+      No hay palabras suficientes para expresar lo que siento. Solo sé que contigo todo tiene sentido, todo es más hermoso.
+    </p>
+
+    <div class="kiss-gif">
+      <div class="kiss-frame">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUyeWYwdWw0bjN6dWl4OGNvdTl4OHNpcmQ1MWVyNmlmbnIxd295dDJvdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/D4hiJ8Oo1xOwUDOzyJ/giphy.gif" 
+             alt="Beso de conejito">
+      </div>
+    </div>
+
+    <p class="letter-text">
+      Este momento, este amor, esta emoción… todo es para ti. Hoy y siempre.
+    </p>
+    <p class="letter-signature">— Con todo mi corazón 💖</p>
+  </div>
+
+  <!-- RELOJ DE PERÚ (solo después del desbloqueo) -->
+  <div class="clock-container">
+    <div class="clock-title">Hora en Perú 🇵🇪</div>
+    <div class="clock" id="peru-clock">Cargando...</div>
+  </div>
+
+  <!-- BOTÓN DE MÚSICA -->
+  <button id="music-button">🎶 Reproducir Música</button>
+
+  <!-- Firma del creador -->
+  <div class="signature">by AnthZz Berrocal • BerMatMods 💖</div>
+
+  <!-- AUDIO -->
+  <audio id="background-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/04/13/audio_7a3e0e5d9c.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Redirigir a TikTok
+    function followTikTok() {
+      window.open('https://www.tiktok.com/@bermat_mods', '_blank');
+      setTimeout(() => {
+        document.getElementById('lock-screen').style.display = 'none';
+      }, 100);
+    }
+
+    // Música
+    document.getElementById('music-button').addEventListener('click', () => {
+      document.getElementById('background-music').play()
+        .then(() => document.getElementById('music-button').style.display = 'none')
+        .catch(() => alert("Por favor, interactúa con la página."));
+    });
+
+    // Reloj de Perú
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('es-PE', { timeZone: 'America/Lima', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+      const dateStr = now.toLocaleDateString('es-PE', { timeZone: 'America/Lima', weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      document.getElementById('peru-clock').textContent = `${timeStr} | ${dateStr}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+  <!-- ROTACIÓN 3D DEL CUBO -->
+  <script>
+    const container = document.getElementById('container');
+    const cube = document.getElementById('cube');
+    let isDragging = false;
+    let startX, startY;
+    let rotateX = 15;
+    let rotateY = 25;
+
+    container.addEventListener('mousedown', (e) => {
       isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      e.preventDefault();
+    });
+
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       startX = e.clientX;
       startY = e.clientY;
     });
 
-    document.addEventListener('mousemove', e => {
-      if (isDragging) {
-        rotY += (e.clientX - startX) * 0.2;
-        rotX -= (e.clientY - startY) * 0.2;
-        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-        startX = e.clientX;
-        startY = e.clientY;
-      }
-    });
-
-    ['mouseup', 'mouseleave'].forEach(event => {
-      document.addEventListener(event, () => isDragging = false);
-    });
-
-    // Touch para móvil
-    scene.addEventListener('touchstart', e => {
-      isDragging = true;
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const deltaX = e.touches[0].clientX - startX;
+      const deltaY = e.touches[0].clientY - startY;
+      rotateY += deltaX * 0.5;
+      rotateX -= deltaY * 0.5;
+      cube.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
-    });
-
-    document.addEventListener('touchmove', e => {
-      if (isDragging) {
-        e.preventDefault();
-        rotY += (e.touches[0].clientX - startX) * 0.2;
-        rotX -= (e.touches[0].clientY - startY) * 0.2;
-        scene.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-      }
     }, { passive: false });
 
-    document.addEventListener('touchend', () => isDragging = false);
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
 
-    // Música al primer clic
-    let musicStarted = false;
-    document.addEventListener('click', () => {
-      if (!musicStarted) {
-        document.getElementById('music').play().catch(() => {});
-        musicStarted = true;
-      }
-    }, { once: true });
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
 
-    // Explosión de frases al tocar
-    document.addEventListener('click', e => {
-      const phrases = [
-        "Te amo mi amor", "Eres mi reina", "Mi niña hermosa", "Mi vida", "Te adoro", 
-        "Mi corazón", "Mi eternidad", "Eres todo", "Te extraño", "Mi alma gemela"
-      ];
-      for (let i = 0; i < 30; i++) {
+    container.addEventListener('selectstart', (e) => e.preventDefault());
+  </script>
+
+  <!-- MOVIMIENTO DE LA CARTA Y EXPLOSIONES -->
+  <script>
+    const letter = document.getElementById('letter');
+    let isMoving = false;
+    let startXLetter, startYLetter;
+
+    letter.addEventListener('mousedown', (e) => {
+      isMoving = true;
+      startXLetter = e.clientX;
+      startYLetter = e.clientY;
+      e.preventDefault();
+    });
+
+    letter.addEventListener('touchstart', (e) => {
+      isMoving = true;
+      startXLetter = e.touches[0].clientX;
+      startYLetter = e.touches[0].clientY;
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isMoving) return;
+      const dx = e.clientX - startXLetter;
+      const dy = e.clientY - startYLetter;
+      const rotateY = (dx / 10) * 0.8;
+      const rotateX = (-dy / 10) * 0.8;
+      letter.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isMoving) return;
+      e.preventDefault();
+      const dx = e.touches[0].clientX - startXLetter;
+      const dy = e.touches[0].clientY - startYLetter;
+      const rotateY = (dx / 10) * 0.8;
+      const rotateX = (-dy / 10) * 0.8;
+      letter.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    }, { passive: false });
+
+    document.addEventListener('mouseup', () => {
+      isMoving = false;
+      letter.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+
+    document.addEventListener('touchend', () => {
+      isMoving = false;
+      setTimeout(() => {
+        letter.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      }, 100);
+    });
+
+    // Explosión de corazones al tocar
+    document.body.addEventListener('click', (e) => {
+      createHeartExplosion(e.clientX, e.clientY);
+    });
+
+    document.body.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      createHeartExplosion(touch.clientX, touch.clientY);
+    });
+
+    function createHeartExplosion(x, y) {
+      const hearts = ['💖', '💗', '💕', '💓', '❤️', '💘', '💝'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-particle';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = x + 'px';
+        heart.style.top = y + 'px';
+        heart.style.opacity = 0;
+        document.body.appendChild(heart);
+
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 140 + 60;
+        const vx = Math.cos(angle) * distance;
+        const vy = Math.sin(angle) * distance;
+
         setTimeout(() => {
-          const w = document.createElement('div');
-          w.classList.add('burst');
-          w.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-          w.style.left = `${e.clientX}px`;
-          w.style.top = `${e.clientY}px`;
+          heart.style.transition = 'all 1.3s ease-out';
+          heart.style.opacity = 1;
+          heart.style.transform = `translate(${vx}px, ${vy}px) rotate(${Math.random() * 360}deg) scale(${Math.random() * 0.8 + 1.2})`;
+        }, 10);
 
-          const a = Math.random() * 360;
-          const d = 80 + Math.random() * 200;
-          const vx = Math.cos(a * Math.PI / 180) * d;
-          const vy = Math.sin(a * Math.PI / 180) * d;
-
-          w.style.setProperty('--x', `${vx}px`);
-          w.style.setProperty('--y', `${vy}px`);
-
-          document.body.appendChild(w);
-          setTimeout(() => w.classList.add('animate'), 10);
-          setTimeout(() => w.remove(), 2200);
-        }, i * 10);
+        setTimeout(() => heart.remove(), 1400);
       }
-    });
-
-    // Lluvia de palabras amorosas
-    const words = ["Amor", "Corazón", "Recuerdo", "Eternidad", "Luz", "Sonrisa", "Esperanza", "Flores", "Amarillo", "Siempre", "Tú", "Brillo", "Paz", "Abrazo", "Vida", "Destino", "Alma", "Verano", "Cariño", "Sueño", "Latido", "Eterno", "Flor", "Rostro", "Mañana", "Reina", "Hermosa", "Mi Todo", "Mi Amor", "Mi Vida"];
-    setInterval(() => {
-      const w = document.createElement('div');
-      w.classList.add('word');
-      if (Math.random() > 0.6) w.classList.add('white');
-      w.textContent = words[Math.floor(Math.random() * words.length)];
-      w.style.left = Math.random() * 100 + 'vw';
-      w.style.top = '-50px';
-      document.body.appendChild(w);
-      setTimeout(() => w.remove(), 15000);
-    }, 100);
-
-    // Estrellas
-    const stars = document.getElementById('stars');
-    for (let i = 0; i < 250; i++) {
-      const s = document.createElement('div');
-      s.classList.add('star');
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.opacity = Math.random() * 0.8 + 0.2;
-      s.style.animationDelay = Math.random() * 5 + 's';
-      stars.appendChild(s);
     }
-
-    // Revelar fases al scroll
-    window.addEventListener('scroll', () => {
-      document.querySelectorAll('.phase').forEach(p => {
-        const r = p.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.8) p.classList.add('visible');
-      });
-    });
   </script>
 
 </body>
-</html>
